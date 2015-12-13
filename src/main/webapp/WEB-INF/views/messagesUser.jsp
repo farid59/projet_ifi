@@ -17,7 +17,7 @@
 
 			<div class="header">
 				<!--  <div class="intro2">-->
-	                    <a href="#">
+	                    <a href="/social/index">
 	                        Star Wars Network
 	                    </a>
 	                   
@@ -44,6 +44,10 @@
 					</c:forEach>
         
                 </div>
+                
+                <a href="/social/index">
+	                        Retour à l'accueil
+	                    </a>
             </div>
         </div>
         <!-- /#page-content-wrapper -->

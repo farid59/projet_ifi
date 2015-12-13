@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -21,6 +22,12 @@ public class User implements Serializable {
 	private Collection<Message> messages;
 	@Lob
 	private byte[] photo;
+	
+
+	@ElementCollection
+	public Set<String> suscribedHashtags;
+	@ElementCollection
+	public Set<String> suscribedUsers;
 
 	public byte[] getPhoto() {
 		return photo;
@@ -92,11 +99,37 @@ public class User implements Serializable {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.messages = new HashSet<Message>();
+		this.suscribedHashtags = new HashSet<String>();
+		this.suscribedUsers = new HashSet<String>();
 	}
 	
 
 	public User() {
 		super();
+	}
+	
+	public void suscribeHashtag(String hashtag) {
+		if (!this.suscribedHashtags.contains(hashtag)) {
+			this.suscribedHashtags.add(hashtag);
+		}
+	}
+	
+	public void unsuscribeHashtag(String hashtag) {
+		if (this.suscribedHashtags.contains(hashtag)) {
+			this.suscribedHashtags.remove(hashtag);
+		}
+	}
+	
+	public void suscribeUser(String user) {
+		if (!this.suscribedUsers.contains(user)) {
+			this.suscribedUsers.add(user);
+		}
+	}
+	
+	public void unsuscribeUser(String user) {
+		if (this.suscribedUsers.contains(user)) {
+			this.suscribedUsers.remove(user);
+		}
 	}
 
 }

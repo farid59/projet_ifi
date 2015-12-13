@@ -7,6 +7,7 @@ import org.reseau.social.entities.User;
 import org.reseau.social.metier.SocialMetier;
 import org.reseau.social.models.MessageForm;
 import org.reseau.social.models.NewMessageForm;
+import org.reseau.social.models.SuscribeHashtagForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +41,13 @@ public class SocialController {
 	@RequestMapping(value="/messages/hashtag/{hashtag}")
 	public String recupererMessageHashtag(@PathVariable String hashtag, Model model) {
 		ArrayList<Message> m = metier.getMessageByHashtag(hashtag);	
+		SuscribeHashtagForm shf = new SuscribeHashtagForm();
+		shf.setHashtag(hashtag);
+		ArrayList<User> users = metier.getUsers();
 		model.addAttribute("hashtag",hashtag);
 		model.addAttribute("messages",m);
+		model.addAttribute("SuscribeHashtagForm",shf);
+		model.addAttribute("users",users);
 		return "messagesHashtag";
 	}
 	
@@ -52,4 +58,24 @@ public class SocialController {
 		model.addAttribute("messages",m);
 		return "messagesUser";
 	}
+	
+	@RequestMapping(value="/suscribeHashtag")
+	public String suscribeHashtag(SuscribeHashtagForm shf, Model model) {
+		User user = metier.consulterUser(shf.getLoginUser());
+		String hashtag = shf.getHashtag();
+		/*
+		 * ce code déclenche l'erreur :
+		 * Etat HTTP 500 - Request processing failed; nested exception is org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: org.reseau.social.entities.User.suscribedHashtags, could not initialize proxy - no Session
+		 */
+//		user.suscribeHashtag(hashtag);
+		ArrayList<Message> m = metier.getMessageByHashtag(hashtag);	
+		shf.setHashtag(hashtag);
+		ArrayList<User> users = metier.getUsers();
+		model.addAttribute("hashtag",hashtag);
+		model.addAttribute("messages",m);
+		model.addAttribute("SuscribeHashtagForm",shf);
+		model.addAttribute("users",users);
+		return "messagesHashtag";
+	}
+	
 }

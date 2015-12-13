@@ -17,7 +17,7 @@
 
 			<div class="header">
 				<!--  <div class="intro2">-->
-	                    <a href="#">
+	                    <a href="/socia/index">
 	                        Star Wars Network
 	                    </a>
 	                   
@@ -32,6 +32,29 @@
             <div class="container-fluid">
                 <div class="row">
                 
+               			<f:form modelAttribute="SuscribeHashtagForm" method="post" action="/social/suscribeHashtag">
+							<table>
+								<tr>
+									<td> Votre pseudo :</td>
+									<td>
+										<f:select path="loginUser">
+											<c:forEach var="option" items="${ users }">
+												<f:option value="${ option.login }"><c:out value="${ option.login }" /></f:option>
+											</c:forEach>
+										</f:select>
+									</td>
+									<td><f:errors path="loginUser"></f:errors></td>
+								</tr>
+								<tr>
+									<td><f:input path="hashtag" type="hidden" /></td>
+									<td><f:errors path="hashtag"></f:errors></td>
+								</tr>
+								<tr>
+									<td><input type="submit" value="S'abonner à ce Hashtag" /></td>
+								</tr>
+							</table>
+						</f:form>
+                
                     <div class="col-lg-12">
                         <h1 class="content-subhead">Tweets with hashtag : <c:out value="${ hashtag }" /></h1>
                         <hr />
@@ -44,6 +67,9 @@
 					</c:forEach>
         
                 </div>
+                <a href="/social/index">
+	                        Retour à l'accueil
+	                    </a>
             </div>
         </div>
         <!-- /#page-content-wrapper -->

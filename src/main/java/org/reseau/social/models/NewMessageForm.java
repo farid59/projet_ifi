@@ -1,7 +1,5 @@
 package org.reseau.social.models;
 
-import org.reseau.social.entities.User;
-
 public class NewMessageForm {
 	public String loginUser;
 	public String content;
