@@ -38,7 +38,8 @@ public class SocialDaoImpl implements SocialDao {
 
 	@Override
 	public ArrayList<Message> getMessages() {
-		Query req = em.createQuery("select content from Message");
+		String hql = "FROM Message";
+		Query req = em.createQuery(hql);
 		ArrayList<Message> resultList = (ArrayList<Message>) req.getResultList();
 		return resultList;
 	}
