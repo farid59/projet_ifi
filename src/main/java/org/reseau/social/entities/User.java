@@ -13,6 +13,8 @@ public class User implements Serializable {
 	@Id
 	private String login;
 	private String email;
+	private String nom;
+	private String prenom;
 	private long phoneNumber;
 	private int tweeterId;
 	private int facebookId;
@@ -29,6 +31,22 @@ public class User implements Serializable {
 	@ElementCollection
 	public Set<String> suscribedUsers;
 
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+	
 	public byte[] getPhoto() {
 		return photo;
 	}

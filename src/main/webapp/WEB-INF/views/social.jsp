@@ -20,7 +20,22 @@
 	                    <a href="#">
 	                        Star Wars Network
 	                    </a>
-	                   
+	                   	<f:form modelAttribute="UserForm" method="POST" action="profil">
+							<table>
+								<tr>
+									<td> Manipuler un profil :</td>
+									<td>
+										<f:select path="login">
+											<c:forEach var="option" items="${ users }">
+												<f:option value="${ option.login }"><c:out value="${ option.login }" /></f:option>
+											</c:forEach>
+										</f:select>
+									</td>
+									<td><f:errors path="login"></f:errors></td>
+									<td><input type="submit" value="voir" /></td>
+								</tr>
+							</table>
+						</f:form>	                   
 	                    <p>A far far away software</p>
 	                    <!-- <input type="button" class="btn btn-default" value="Login" /> -->
 				<!--  </div>-->

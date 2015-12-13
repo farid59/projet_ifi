@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.reseau.social.entities.Message;
 import org.reseau.social.entities.User;
 import org.reseau.social.metier.SocialMetier;
-import org.reseau.social.models.MessageForm;
 import org.reseau.social.models.NewMessageForm;
 import org.reseau.social.models.SuscribeHashtagForm;
+import org.reseau.social.models.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +24,9 @@ public class SocialController {
 		ArrayList<Message> m = metier.getMessages();
 		ArrayList<User> users = metier.getUsers();
 		NewMessageForm nmf = new NewMessageForm();
+		UserForm uf = new UserForm();
 		model.addAttribute("NewMessageForm",nmf);
+		model.addAttribute("UserForm",uf);
 		model.addAttribute("users",users);
 		model.addAttribute("messages",m);
 		return "social";
@@ -77,5 +79,17 @@ public class SocialController {
 		model.addAttribute("users",users);
 		return "messagesHashtag";
 	}
+	
+	@RequestMapping(value="/profil")
+	public String manipulerProfilUser(Model model, UserForm uf) {
+		System.out.println(uf.getLogin());
+		User usr = metier.consulterUser(uf.getLogin()); 	
+		ArrayList<User> users = metier.getUsers();
+		model.addAttribute("UserForm",uf);
+		model.addAttribute("users",users);
+		model.addAttribute("user",usr);
+		return "user";
+	}
+	
 	
 }
