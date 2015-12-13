@@ -36,7 +36,13 @@
 							<table>
 								<tr>
 									<td> Votre pseudo :</td>
-									<td><f:input path="loginUser" /></td>
+									<td>
+										<f:select path="loginUser">
+											<c:forEach var="option" items="${ users }">
+												<f:option f:value="${ option.login }"><c:out value="${ option.login }" /></f:option>
+											</c:forEach>
+										</f:select>
+									</td>
 									<td><f:errors path="loginUser"></f:errors></td>
 								</tr>
 								<tr>
