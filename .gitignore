@@ -1,3 +1,4 @@
 Maven Dependencies
 JRE System Library
 target/classes/*
+src/main/resources/applicationContext.xml
