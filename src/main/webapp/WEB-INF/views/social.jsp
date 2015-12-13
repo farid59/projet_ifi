@@ -39,7 +39,7 @@
 									<td>
 										<f:select path="loginUser">
 											<c:forEach var="option" items="${ users }">
-												<f:option f:value="${ option.login }"><c:out value="${ option.login }" /></f:option>
+												<f:option value="${ option.login }"><c:out value="${ option.login }" /></f:option>
 											</c:forEach>
 										</f:select>
 									</td>
@@ -79,6 +79,7 @@
         <!-- /#page-content-wrapper -->
 	</div>
 	
+
 
 
 <style type="text/css">
@@ -141,6 +142,7 @@
 		margin-bottom: -20px;
 }
 </style>
+
 
 </body>
 </html>

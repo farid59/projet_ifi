@@ -8,6 +8,12 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 	</configs>
+<<<<<<< 5aeaeaddb0a5b1ee7c40465fc84b27ab20a2eb07
+=======
+	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
+	</autoconfigs>
+>>>>>>> Restructuration du code
 	<configSets>
 	</configSets>
 </beansProjectDescription>
