@@ -122,5 +122,22 @@ public class Message implements Serializable{
 		}
 	}
 	
+	public String getFormatedContent() {
+		String[] words = this.content.split(" ");
+		
+		int index = 0;
+		for (String word : words) {
+			if (word.subSequence(0,1).equals("#")) {
+				String tag = word.substring(1);
+				words[index]="<a href='/social/messages/hashtag/"+tag+"'>"+word+"</a>";
+			} else if (word.subSequence(0,1).equals("@")) {
+				String user = word.substring(1);	
+				words[index]="<a href='/social/messages/user/"+user+"'>"+word+"</a>";
+			} 
+			index++;
+		}
+		
+		return String.join(" ", words);
+	}
 	
 }

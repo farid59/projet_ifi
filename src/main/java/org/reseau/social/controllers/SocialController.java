@@ -10,6 +10,7 @@ import org.reseau.social.models.NewMessageForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -27,17 +28,6 @@ public class SocialController {
 		model.addAttribute("messages",m);
 		return "social";
 	}
-/*
-	@RequestMapping(value="/chargerMessage")
-	public String charger(MessageForm mf, Model model){
-		ArrayList<Message> m = metier.getMessageByHashtag(mf.getHashtag());	
-		System.out.println(m.get(0).getContent());
-		mf.setMsg(m);
-		model.addAttribute("MessageForm",mf);
-		model.addAttribute("messages",m);
-		return "social";
-	}
-*/
 	
 	@RequestMapping(value="/posterMessage")
 	public String poster(NewMessageForm nmf, Model model) {
@@ -45,5 +35,21 @@ public class SocialController {
 		Message message = new Message(nmf.getContent(), user);
 		metier.addMessage(message);
 		return this.index(model);
+	}
+	
+	@RequestMapping(value="/messages/hashtag/{hashtag}")
+	public String recupererMessageHashtag(@PathVariable String hashtag, Model model) {
+		ArrayList<Message> m = metier.getMessageByHashtag(hashtag);	
+		model.addAttribute("hashtag",hashtag);
+		model.addAttribute("messages",m);
+		return "messagesHashtag";
+	}
+	
+	@RequestMapping(value="/messages/user/{user}")
+	public String recupererMessageUser(@PathVariable String user, Model model) {
+		ArrayList<Message> m = metier.getMessageByUser(user);	
+		model.addAttribute("user",user);
+		model.addAttribute("messages",m);
+		return "messagesUser";
 	}
 }

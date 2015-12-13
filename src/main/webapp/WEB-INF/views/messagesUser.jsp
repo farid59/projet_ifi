@@ -31,34 +31,9 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                	<div>
-						<f:form modelAttribute="NewMessageForm" method="post" action="posterMessage">
-							<table>
-								<tr>
-									<td> Votre pseudo :</td>
-									<td>
-										<f:select path="loginUser">
-											<c:forEach var="option" items="${ users }">
-												<f:option f:value="${ option.login }"><c:out value="${ option.login }" /></f:option>
-											</c:forEach>
-										</f:select>
-									</td>
-									<td><f:errors path="loginUser"></f:errors></td>
-								</tr>
-								<tr>
-									<td> Votre message :</td>
-									<td><f:input path="content" /></td>
-									<td><f:errors path="content"></f:errors></td>
-								</tr>
-								<tr>
-									<td><input type="submit" value="poster" /></td>
-								</tr>
-							</table>
-						</f:form>
-					</div>
                 
                     <div class="col-lg-12">
-                        <h1 class="content-subhead">Last tweets</h1>
+                        <h1 class="content-subhead">Tweets by user : <c:out value="${ user }" /></h1>
                         <hr />
                     </div>
                     
@@ -67,17 +42,17 @@
 						<span><c:out value="${message.formatedContent}" escapeXml="false"/></span>
 						<h4><small><c:out value="${message.user.login}"/>, le <c:out value="${message.dateCreation}"/></small></h4>
 					</c:forEach>
-                    
-                    
-                
-
-
         
                 </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
 	</div>
+
+
+
+
+
 	
 
 
