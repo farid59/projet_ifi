@@ -20,7 +20,14 @@
 	                    <a href="/social/index">
 	                        Star Wars Network
 	                    </a>
-	                   
+						<f:form modelAttribute="UserForm" method="POST" action="profil">
+							<f:select path="login">
+								<c:forEach var="option" items="${ users }">
+									<f:option value="${ option.login }"><c:out value="${ option.login }" /></f:option>
+								</c:forEach>
+							</f:select>
+						<input type="submit" value="voir le profil" />
+						</f:form>                   	                   
 	                    <p>A far far away software</p>
 	                    <!-- <input type="button" class="btn btn-default" value="Login" /> -->
 				<!--  </div>-->
@@ -31,12 +38,32 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
+
+               			<f:form modelAttribute="SuscribeUserForm" method="post" action="/social/suscribeUser">
+							<table>
+								<tr>
+									<td> Votre pseudo :</td>
+									<td>
+										<f:select path="loginUser1">
+											<c:forEach var="option" items="${ users }">
+												<f:option value="${ option.login }"><c:out value="${ option.login }" /></f:option>
+											</c:forEach>
+										</f:select>
+									</td>
+								</tr>
+								<tr>
+									<td><f:input path="loginUser2" type="hidden" /></td>
+								</tr>
+								<tr>
+									<td><input type="submit" value="S'abonner à cette personne" /></td>
+								</tr>
+							</table>
+						</f:form>
                 
                     <div class="col-lg-12">
                         <h1 class="content-subhead">Tweets by user : <c:out value="${ user }" /></h1>
                         <hr />
                     </div>
-                    
                     <c:forEach var="message" items="${messages}">
 						<h4 class="media-heading"></h4>
 						<span><c:out value="${message.formatedContent}" escapeXml="false"/></span>

@@ -2,11 +2,19 @@ package org.reseau.social.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User implements Serializable {
@@ -24,13 +32,61 @@ public class User implements Serializable {
 	private Collection<Message> messages;
 	@Lob
 	private byte[] photo;
+	private String imagePath;
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	private String hashtags;
+	private String users;
+
+	public String getHashtags() {
+		return hashtags;
+	}
+
+	public void setHashtags(String hashtags) {
+		this.hashtags = hashtags;
+	}
+
+	public Set<String> getSuscribedHashtags() {
+		return suscribedHashtags;
+	}
+
+	public void setSuscribedHashtags(Set<String> suscribedHashtags) {
+		this.suscribedHashtags = suscribedHashtags;
+	}
+
+	public Set<String> getSuscribedUsers() {
+		return suscribedUsers;
+	}
+
+	public void setSuscribedUsers(Set<String> suscribedUsers) {
+		this.suscribedUsers = suscribedUsers;
+	}
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<String> suscribedHashtags;
+
+	@ElementCollection
+	private Set<String> suscribedUsers;
+
+	public User(String login, String nom, String prenom,String email, long phoneNumber) {
+		super();
+		this.login = login;
+		this.email = email;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.phoneNumber = phoneNumber;
+		this.messages = new HashSet<Message>();
+		this.suscribedHashtags = new HashSet<String>();
+		this.suscribedUsers = new HashSet<String>();
+		this.hashtags="";
+	}
 	
-
-	@ElementCollection
-	public Set<String> suscribedHashtags;
-	@ElementCollection
-	public Set<String> suscribedUsers;
-
 	public String getNom() {
 		return nom;
 	}
@@ -119,6 +175,7 @@ public class User implements Serializable {
 		this.messages = new HashSet<Message>();
 		this.suscribedHashtags = new HashSet<String>();
 		this.suscribedUsers = new HashSet<String>();
+		this.hashtags = "";
 	}
 	
 
@@ -126,9 +183,44 @@ public class User implements Serializable {
 		super();
 	}
 	
-	public void suscribeHashtag(String hashtag) {
-		if (!this.suscribedHashtags.contains(hashtag)) {
-			this.suscribedHashtags.add(hashtag);
+	public List<String> getHashtagsToArray(){
+		if(this.hashtags==null)
+			return null;
+		else {
+		List<String> hash = new ArrayList<String>(Arrays.asList(this.hashtags.split(";")));
+		return hash;
+		}
+	}
+	public String suscribeHashtag(String hashtag) {
+		if(this.hashtags==null)
+			this.hashtags = hashtag;
+		else {
+			List<String> hash = new ArrayList<String>(Arrays.asList(this.hashtags.split(";")));
+			if (!hash.contains(hashtag)) {
+				hash.add(hashtag);
+			}
+			if (!hash.contains(hashtag)) {
+				hash.add(hashtag);
+			}
+			String listString = "";
+			Iterator<String> it = hash.iterator();
+			while(it.hasNext()){
+				listString = it.next()+";";
+			}
+			listString.subSequence(0, listString.length()-1);
+			System.out.println(listString);
+			this.hashtags = listString;
+		}
+		return this.hashtags;
+	}
+	
+	
+	public List<String> getUsersToArray(){
+		if(this.users==null)
+			return null;
+		else {
+		List<String> users = new ArrayList<String>(Arrays.asList(this.users.split(";")));
+		return users;
 		}
 	}
 	

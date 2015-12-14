@@ -15,4 +15,14 @@ public interface SocialMetier {
 	public User consulterUser(String login);
 	public ArrayList<User> getUsers();
 	public void addUser(Utilisateur util);
+	public String subscribeHashtag(User user,String hashtag);
+	public String getHashtagsByUser(User user);
+	public long countMessagesByUser(User user);
+	public String subscribeUser(User user1, String user2);
+	public String getUsersByUser(User user);
+	public long nbFollower(User usr);
+	public void editProfil(String login, String nom,String prenom,String email,long mobile);
+	public void updateProfil(User usr);
+
+
 }

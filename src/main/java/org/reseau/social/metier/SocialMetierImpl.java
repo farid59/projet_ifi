@@ -56,4 +56,45 @@ public class SocialMetierImpl implements SocialMetier{
 		dao.addUser(util);		
 	}
 
+	@Override
+	public String subscribeHashtag(User user, String hashtag) {
+		return dao.subscribeHashtag(user,hashtag);
+	}
+
+	@Override
+	public String getHashtagsByUser(User user) {
+		return dao.getHashtagsByUser(user);
+	}
+
+	@Override
+	public long countMessagesByUser(User user) {
+		return dao.countMessagesByUser(user);
+
+	}
+
+	@Override
+	public String subscribeUser(User user1, String user2) {
+		return dao.subscribeUser(user1, user2);
+	}
+
+	@Override
+	public String getUsersByUser(User user) {
+		return dao.getUsersByUser(user);
+	}
+
+	@Override
+	public long nbFollower(User usr) {
+		return dao.nbFollower(usr);
+	}
+
+	@Override
+	public void editProfil(String login, String nom, String prenom, String email, long mobile) {
+		dao.editProfil(login, nom, prenom, email, mobile);
+	}
+
+	@Override
+	public void updateProfil(User usr) {
+		dao.updateProfil(usr);		
+	}
+
 }

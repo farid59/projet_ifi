@@ -21,20 +21,12 @@
 	                        Star Wars Network
 	                    </a>
 	                   	<f:form modelAttribute="UserForm" method="POST" action="profil">
-							<table>
-								<tr>
-									<td> Manipuler un profil :</td>
-									<td>
-										<f:select path="login">
-											<c:forEach var="option" items="${ users }">
-												<f:option value="${ option.login }"><c:out value="${ option.login }" /></f:option>
-											</c:forEach>
-										</f:select>
-									</td>
-									<td><f:errors path="login"></f:errors></td>
-									<td><input type="submit" value="voir" /></td>
-								</tr>
-							</table>
+							<f:select path="login">
+								<c:forEach var="option" items="${ users }">
+									<f:option value="${ option.login }"><c:out value="${ option.login }" /></f:option>
+								</c:forEach>
+							</f:select>
+						<input type="submit" value="voir le profil" />
 						</f:form>
 	                    <p>A far far away software</p>
 	                    <!-- <input type="button" class="btn btn-default" value="Login" /> -->
@@ -58,14 +50,10 @@
                             <p><strong>Prenom: </strong><c:out value="${user.prenom}" />.</p>
                             <p><strong>Email: </strong> <c:out value="${user.email}" />. </p>
                             <p><strong>Numero: </strong><c:out value="${user.phoneNumber}" />. </p>
-                            <p><strong>Abonnement: </strong>
-                            	<c:forEach var="hashtag" items="${ user.suscribedHashtags }">
-                            		<span class="label label-info tags"><c:out value="${ hashtag }" /></span>
-								</c:forEach>
-                                <span class="label label-info tags">html5</span> 
-                                <span class="label label-info tags">css3</span>
-                                <span class="label label-info tags">jquery</span>
-                                <span class="label label-info tags">bootstrap3</span>
+                            <p><strong>Abonnement(s): </strong>
+                            	<c:forEach var="hashtag" items="${ hashtags }">
+                            		<span class="label label-info tags">#<c:out value="${ hashtag }" /></span>
+								</c:forEach> 
                             </p>
                         </div><!--/col-->          
                         <div class="col-xs-12 col-sm-4 text-center">
@@ -80,25 +68,35 @@
                         </div><!--/col-->
 
                         <div class="col-xs-12 col-sm-4">
-                            <h2><strong> 45 </strong></h2>                    
-                            <p><small>Followers</small></p>
-                            <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Suivre </button>
+                        	<f:form modelAttribute="UserForm" method="POST" action="modifProfil">
+								<input type="hidden" name="login" value="${user.login}" />
+								<input type="submit" value="Modifier le profil"class="btn btn-info btn-block" />
+							</f:form>
+                            <!--<a href="${urlModifier}" class="btn btn-info btn-block"><span class="fa fa-plus-circle"></span> Modifier </a>-->
                         </div><!--/col-->
                         <div class="col-xs-12 col-sm-4">
-                            <h2><strong>245</strong></h2>                    
+                            <h2><strong><c:out value="${nb}" /></strong></h2>                    
                             <p><small>tweets</small></p>
-                            <button class="btn btn-info btn-block"><span class="fa fa-user"></span> Voir ses tweets </button>
+                            <a href="${urlMsg}" class="btn btn-info btn-block"><span class="fa fa-user"></span> Voir ses tweets </a>
                         </div><!--/col-->
                         <div class="col-xs-12 col-sm-4">
-                            <h2><strong>43</strong></h2>                    
-                            <p><small>Snippets</small></p>
-                            <button type="button" class="btn btn-primary btn-block"><span class="fa fa-gear"></span> se désabonner </button>  
+                            <h2><strong><c:out value="${nbFollower}" /></strong></h2>                    
+                            <p><small>Followers</small></p> 
+	                            <a href="${desabonner}" class="btn btn-info btn-block"><span class="fa fa-gear"></span> se désabonner </a>
+	                            <c:if test="${nbFollower>0}">
+	                            	<c:forEach var="follower" items="${ followers }">
+	                            		<span class="label label-info tags"><c:out value="${ follower }" /></span>
+									</c:forEach>
+							</c:if> 
+	                            
                         </div><!--/col-->
               		</div><!--/row-->
               </div><!--/panel-body-->
           </div><!--/panel-->
 
-    
+                    <a href="/social/index">
+	                        Retour à l'accueil
+	                    </a>
     
     </div>
   </div>

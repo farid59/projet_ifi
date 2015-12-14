@@ -17,17 +17,17 @@
 
 			<div class="header">
 				<!--  <div class="intro2">-->
-	                    <a href="/socia/index">
+	                    <a href="#">
 	                        Star Wars Network
 	                    </a>
-						<f:form modelAttribute="UserForm" method="POST" action="profil">
+	                   	<f:form modelAttribute="UserForm" method="POST" action="profil">
 							<f:select path="login">
 								<c:forEach var="option" items="${ users }">
 									<f:option value="${ option.login }"><c:out value="${ option.login }" /></f:option>
 								</c:forEach>
 							</f:select>
 						<input type="submit" value="voir le profil" />
-						</f:form>                   	                   
+						</f:form>
 	                    <p>A far far away software</p>
 	                    <!-- <input type="button" class="btn btn-default" value="Login" /> -->
 				<!--  </div>-->
@@ -37,56 +37,49 @@
         
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <div class="row">
-                
-               			<f:form modelAttribute="SuscribeHashtagForm" method="post" action="/social/suscribeHashtag">
-							<table>
-								<tr>
-									<td> Votre pseudo :</td>
-									<td>
-										<f:select path="loginUser">
-											<c:forEach var="option" items="${ users }">
-												<f:option value="${ option.login }"><c:out value="${ option.login }" /></f:option>
-											</c:forEach>
-										</f:select>
-									</td>
-									<td><f:errors path="loginUser"></f:errors></td>
-								</tr>
-								<tr>
-									<td><f:input path="hashtag" type="hidden" /></td>
-									<td><f:errors path="hashtag"></f:errors></td>
-								</tr>
-								<tr>
-									<td><input type="submit" value="S'abonner à ce Hashtag" /></td>
-								</tr>
-							</table>
-						</f:form>
-                
-                    <div class="col-lg-12">
-                        <h1 class="content-subhead">Tweets with hashtag : <c:out value="${ hashtag }" /></h1>
-                        <hr />
-                    </div>
-                    
-                    <c:forEach var="message" items="${messages}">
-						<h4 class="media-heading"></h4>
-						<span><c:out value="${message.formatedContent}" escapeXml="false"/></span>
-						<h4><small><c:out value="${message.user.login}"/>, le <c:out value="${message.dateCreation}"/></small></h4>
-					</c:forEach>
-        
-                </div>
-                <a href="/social/index">
+<div class="container">
+  <div class="row">
+  	<div class="col-md-6">
+    <div class="container">
+		<div class="col-md-5">
+		    <div class="form-area">  
+		        <f:form modelAttribute="profilForm" method="POST" action="editProfil" role="form">
+		        <br style="clear:both">
+		                    <h3 style="margin-bottom: 25px; text-align: center;">Profil Form</h3>
+							<input type="hidden" class="form-control" id="login" name="login"  value="${user.login}" >
+		    				<div class="form-group">
+								<input type="text" class="form-control" id="nom" name="nom"  value="${user.nom}" required>
+							</div>
+		    				<div class="form-group">
+								<input type="text" class="form-control" id="prenom" name="prenom"  value="${user.prenom}" required>
+							</div>							
+							<div class="form-group">
+								<input type="text" class="form-control" id="email" name="email"  value="${user.email}">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="mobile" name="mobile"  value="${user.phoneNumber}">
+							</div>
+						<input type="submit" value="mettre à jour le profil" class="btn btn-primary pull-right"/>
+		        <!--  <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">Submit Form</button>-->
+		        </f:form>
+		    </div>
+		</div>
+		</div>
+ 
+
+                    <a href="/social/index">
 	                        Retour à l'accueil
 	                    </a>
+    
+    </div>
+  </div>
+</div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
 	</div>
-
-
-
-
-
 	
+
 
 
 <style type="text/css">
@@ -149,6 +142,7 @@
 		margin-bottom: -20px;
 }
 </style>
+
 
 </body>
 </html>
